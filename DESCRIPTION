@@ -1,12 +1,13 @@
 Package: hsRd
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Report Templates and Useful Functions for HSR&D Data Folks
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
-Suggests: drake, renv
+Author: Scott Coggeshall
+Maintainer: <scott.coggeshall@va.gov>
+Description: This package contains .rmd templates for reports (e.g. statistical analysis plans) as well as miscellaneous helper functions for common tasks encountered by HSR&D data folks.
+License: MIT License
+Suggests: drake,
+          renv
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.1.1

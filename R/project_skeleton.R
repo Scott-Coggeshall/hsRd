@@ -1,3 +1,20 @@
+#' Create Project Skeleton Structure
+#'
+#' \code{project_skeleton} creates a project structure that's particularly useful for drake projects.
+#'
+#' @param project_path a character string containing the path where the project should be created.
+#' @param init_packages a character vector containing names of packages that should be written to project's 'packages.R' file.
+#' @param init_rproj a logical value indicating whether the created project should also be an Rstudio-style project. Default is \code{TRUE}.
+#' @param init_git a logical value indicating whether the created project should also be tracked by git. Default is \code{TRUE}.
+#' @param init_renv a logical value indicating whether the created project should use \code{renv} for package management. Default is \code{TRUE}.
+#' @param init_report a character string indicating which of the report templates available in \code{hsRd} should be included in the project folder 'reports'.
+#'   If \code{NULL} (the default), then no template is added.
+#'
+#' @details The folder path specified in \code{project_path} should be a path of directories ending in the name of the not-yet-existing folder that will contain
+#'   the project. For instance, to create a project named \emph{my_analysis} inside the folder \emph{my_project} on the \emph{J} drive, you would specify
+#'   \code{project_path = "J:/my_project/my_analysis"} in the call to \code{project_skeleton}. This function creates folders and files, so you must have write
+#'   permissions within the directory that contains your project.
+#' @return Returns \code{NULL} silently.
 project_skeleton <- function(project_path, init_packages = c("drake", "tidyverse"), init_rproj = TRUE, init_git = TRUE, init_renv = TRUE, init_report = NULL){
 
   # don't overwrite existing directory
