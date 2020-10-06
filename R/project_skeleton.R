@@ -9,7 +9,7 @@
 #' @param init_renv a logical value indicating whether the created project should use \code{renv} for package management. Default is \code{TRUE}.
 #' @param init_report a character string indicating which of the report templates available in \code{hsRd} should be included in the project folder 'reports'.
 #'   If \code{NULL} (the default), then no template is added.
-#'
+#' @export
 #' @details The folder path specified in \code{project_path} should be a path of directories ending in the name of the not-yet-existing folder that will contain
 #'   the project. For instance, to create a project named \emph{my_analysis} inside the folder \emph{my_project} on the \emph{J} drive, you would specify
 #'   \code{project_path = "J:/my_project/my_analysis"} in the call to \code{project_skeleton}. This function creates folders and files, so you must have write
