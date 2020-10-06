@@ -69,7 +69,7 @@ knitr::opts_chunk$set(echo = TRUE)
 *list of confounders (i.e. variables related to both the predictor(s) of interest and outcome) and/or precision variables (i.e. variables related to the outcome but not the predictor(s) of interest). If there are multiple predictor(s) of interest and/or outcome(s), specify confounders and/or precision variables for each of these separately.*
 
 # Statistical Analyses and Description of Main Tables
-*Describe the main statistical analyses that will be conducted, including any rationale for the specific statistical techniques. Describe the main tables and possibly figures that will be prepared. Include references to shell tables and figure in the Appendix. This section should include a sub-section for each study aim describing the statistical analyses that you will conduct for that aim. 
+*Describe the main statistical analyses that will be conducted, including any rationale for the specific statistical techniques. Describe the main tables and possibly figures that will be prepared. Include references to shell tables and figure in the Appendix. This section should include a sub-section for each study aim describing the statistical analyses that you will conduct for that aim.*
 ## Aim 1 Statistical Analyses
 
 ## Aim 2 Statistical Analyses
