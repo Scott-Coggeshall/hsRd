@@ -1,0 +1,90 @@
+---
+title: "Statistical Analysis Plan Template"
+author: "Project Team: project lead, analyst(s) statistician(s), other collaborators"
+output:
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    number_sections: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Study Summary and Aims
+
+## Study purpose
+
+*Brief statement of purpose*
+
+## Study Design
+
+*Describe design (e.g. retrospective cohort study, cross-sectional study, prospective longitudinal study). Briefly describe comparison groups of interest.*
+
+## Primary Aims
+
+*List of aims stated in terms of the scientific question of interest that can be easily translated into well-defined outcomes and statistical questions.*
+
+## Secondary Aims
+
+*List of aims stated in terms of the scientific question of interest that can be easily translated into well-defined outcomes and statistical questions.*
+
+
+# Data Sources
+
+*brief description of data sources*
+
+# Study Population
+
+*Inclusion/exclusion criteria of who will be included*
+
+# Study Measurement Time Period
+
+*Time period for measuring outcomes and covariates*
+
+# Study Outcomes
+
+
+## Primary Outcomes
+
+*Specific definition(s) of primary outcome(s), how it will be used in the analysis (e.g. continuous, categorical with groupings by ranges X), how often it will be measured*
+
+
+## Secondary Outcomes
+
+*Specific definition(s) of secondary outcome(s), how it will be used in the analysis (e.g. continuous, categorical with groupings by ranges X), how often it will be measured*
+
+# Study Covariates
+
+*include variable definitions; include whether variables are continuous or categorical and how categories are defined; include how often variables are measured; define any derived variables that are aggregated or modified from existing variables. Include all rationale for decisions to aggregrate, categorize, etc.*
+
+## Covariate(s) of Interest
+
+*main predictors of interest*
+
+## Confounders/precision variables for Adjustment
+
+*list of confounders (i.e. variables related to both the predictor(s) of interest and outcome) and/or precision variables (i.e. variables related to the outcome but not the predictor(s) of interest). If there are multiple predictor(s) of interest and/or outcome(s), specify confounders and/or precision variables for each of these separately.*
+
+# Statistical Analyses and Description of Main Tables
+*Describe the main statistical analyses that will be conducted, including any rationale for the specific statistical techniques. Describe the main tables and possibly figures that will be prepared. Include references to shell tables and figure in the Appendix. This section should include a sub-section for each study aim describing the statistical analyses that you will conduct for that aim. 
+## Aim 1 Statistical Analyses
+
+## Aim 2 Statistical Analyses
+
+# Proposed Timeline
+
+*outline of proposed timeline of analysis-related tasks, potentially in the form of a Gantt chart*
+
+# Project Links
+
+*links or folder/file locations for related project documents, e.g. project proposal, project descriptions, data dictionaries, etc.*
+
+# Appendix: Shell Tables and Figures
+
+*any shell tables or figures referenced in Section 7 should be included here.*
+
+
+
