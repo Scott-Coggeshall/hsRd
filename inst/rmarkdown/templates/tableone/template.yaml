@@ -1,0 +1,4 @@
+name: tableone
+description: >
+   A template for creating a "Table 1"-style table of summary statistics.
+create_dir: FALSE

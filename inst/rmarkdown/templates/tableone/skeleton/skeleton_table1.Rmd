@@ -1,0 +1,226 @@
+---
+title: "Making A Table1"
+author: "Rian DeFaccio"
+date: "10/15/2020"
+output: word_document
+---
+
+Use history and changes:
+ - Rian: Oct 2020
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  comment = '', echo = FALSE, message = FALSE, warnings = FALSE
+)
+```
+
+## Outline  
+1. format data
+2. create tableone dataframes
+3. formatting tables
+4. output to Word
+
+```{r}
+##### packages #####
+library(tidyverse)
+library(tableone)
+library(flextable)
+library(openxlsx)
+library(data.table)
+library(officedown)
+```
+
+```{r}
+# First some fake data
+data <- tibble(ID          = 1:10000,
+               Gender      = sample(c("M", "F", NA), size = 10000, prob = c(0.9, 0.05, 0.05), replace = T),
+               Age         = sample(18:85, size = 10000, replace = T),
+               Race        = sample(c("White", "Black", "Asian", NA), size = 10000, prob = c(0.7, 0.2, .05, .05), replace = T),
+               Rurality    = sample(c("U", "R", NA), size = 10000, prob = c(0.7, 0.2, 0.1), replace = T),
+               MH_cohort   = sample(c(1, 0), size = 10000, prob = c(0.65, 0.35), replace = T),
+               Pain_cohort = sample(c(1, 0), size = 10000, prob = c(0.5, 0.5), replace = T),
+               PTSD_cohort = sample(c(1, 0), size = 10000, prob = c(0.1, 0.9), replace = T))
+data[55, "Age"] <- NA
+# General form of the analytic table: ID, covariates, cohorts
+```
+
+```{r}
+# 1. format data into factors
+
+# cut any continuous variables into categories (just age now)
+data <- data %>%                                                                   ### edit start###
+  setDT() %>%
+  mutate(AgeC = cut(Age, include.lowest = TRUE, right = FALSE,
+                    breaks = c(18, 40, 50, 60, 70, 200), 
+                    labels = c("18 - 39", "40 - 49", "50 - 59", "60 - 69", "70 +")))
+# convert all variables to factors and make missing values explicit
+data <- data %>%
+  mutate(Gender = factor(Gender, levels = c("M", "F"), labels = c("Male", "Female")),
+         Race   = factor(Race, levels = c("White", "Black", "Asian")),
+         Rurality = factor(Rurality, levels = c("U", "R"), labels = c("Urban", "Rural")),
+         Gender = fct_explicit_na(Gender, na_level = "Unknown"),
+         Race = fct_explicit_na(Race, na_level = "Unknown"),
+         Rurality = fct_explicit_na(Rurality, na_level = "Unknown"),
+         AgeC = fct_explicit_na(AgeC, na_level = "Unknown"))                       ### edit stop ###
+```
+
+```{r}
+# Have a cohort that is mutually exclusive (like yes/no to mental health)
+# data <- data %>%
+#   mutate(MH_yes = ifelse(MH_cohort == 1, 1, 0),
+#          MH_no  = ifelse(MH_cohort == 0, 1, 0))
+# then apply these two new columns to the cohorts variable in the next step
+```
+
+
+```{r}
+# 2. create table1 data frames
+
+vars <- c("Gender", "AgeC", "Race", "Rurality")                                         ### edit ###
+cohorts <- c("MH_cohort", "Pain_cohort", "PTSD_cohort")                                 ### edit ###
+
+overall <- CreateTableOne(vars = vars,
+                               data = data,
+                               test = FALSE,
+                               includeNA = TRUE)
+overall_print <- print(overall, format = "p", printToggle = F)
+table1 <- data.frame(Var = dimnames(overall_print )[[1]],
+                     Overall = unname(overall_print [, 1]),
+                     stringsAsFactors = FALSE)
+
+# loop through each cohort and cbind to overall table1
+for (i in 1:length(cohorts)) {
+  
+  current_cohort <- data[get(cohorts[i]) == 1]
+  table_current <- CreateTableOne(vars = vars,
+                                  data = current_cohort,
+                                  test = FALSE,
+                                  includeNA = TRUE)
+  table_current_print <- print(table_current, format = "p", printToggle = F)
+  
+  table1[[cohorts[i]]] <- unname(table_current_print[, 1])
+}
+
+# 3. Custom formatting
+
+# checking Uknown rows, if some are zero, remove
+table1_final <- table1[-12, ]                                                           ### edit ###         
+rownames(table1_final) <- 1:nrow(table1_final)
+
+# renaming columns
+table1_final <- table1_final %>% 
+  rename(" " = Var,                                                                     ### edit ###
+         `All Patients` = Overall,
+         `Mental Health\nCohort` = MH_cohort,
+         `Pain Cohort` = Pain_cohort,
+         `PTSD Cohort` = PTSD_cohort)
+
+# renaming rows
+new_row_names <- c("# of Patients", "Gender", "Age", "Race", "Rurality")                ### edit ###
+var_rows <- c(1, str_detect(table1_final$` `, "(%)") %>% which())
+counter <- 1
+for (i in var_rows) {
+  table1_final[i, 1] <- new_row_names[counter]  
+  counter <- counter + 1
+}
+
+# want row percents across the first row?                                               
+table1_final[1, 3:ncol(table1_final)] <-
+  format(round(table1_final[1, 3:ncol(table1_final)] %>%
+                 as.numeric() / table1_final[1, 2] %>%
+                 as.numeric() * 100, 1), nsmall = 1) %>%
+  paste0("\n(", ., "%)") %>%
+  paste0(table1_final[1, 3:ncol(table1_final)] %>%
+           as.numeric() %>%
+           prettyNum(., big.mark = ","), .)
+table1_final[1, 1] <- paste0(table1_final[[1]][1], "\n(% of all Patients)")
+
+# more formatting of row 1
+if (any(str_detect(table1_final[1, ], "%"))) {
+  table1_final[1, 2] <- table1_final[[2]][1] %>% 
+    as.numeric() %>% 
+    prettyNum(., big.mark = ",")
+} else {
+  table1_final[1, 2:ncol(table1_final)] <- table1_final[1, 2:ncol(table1_final)] %>% 
+    as.numeric() %>% 
+    prettyNum(., big.mark = ",")
+}
+
+# adding percent signs
+row.names(table1_final) <- 1:nrow(table1_final)
+`%notin%` <- Negate(`%in%`)
+var_level_rows <- which(table1_final$` ` %notin% new_row_names)
+var_level_rows <- var_level_rows[!(var_level_rows == 1)]
+for (i in var_level_rows) {
+  for (j in 2:ncol(table1_final)) {
+    table1_final[i, j] <- paste0(table1_final[i, j], "%")
+  }
+}
+
+# indent variable levels
+table1_final[var_level_rows, 1] <- paste0("    ", table1_final[var_level_rows, 1])
+```
+
+```{r}
+# 4a. Output to Word
+# `flextable` documentation:
+# https://davidgohel.github.io/flextable/articles/overview.html
+
+flex_table <- flextable(table1_final) %>%
+  width(j = 1:5, width = c(1.5, 1, 1.2, 1, 1)) %>%                                      ### edit ###
+  align(j = 1, align = "left") %>%
+  bold(i = var_rows, j = 1) %>%
+  add_header_lines("Table 1. Demographics of Some Hypothetical Cohorts") %>%            ### edit ###
+  fontsize(size = 11, part = "all") %>%
+  bold(part = "header", i = 2) %>%
+  bg(part = "all", bg = "light grey", j = seq(2, ncol(table1_final), by = 2)) %>%
+  footnote(i = c(3, 7), j = 1,                                                          ### edit ###
+             value = as_paragraph(c("this is a footnote",
+                                    "and another footnoate")),
+             ref_symbols = c("a", "b"),
+             part = "body")
+flex_table
+```
+
+```{r eval = FALSE}
+# 4b. Output to Excel
+
+workbook<-createWorkbook()
+    
+sheet_name <- "Table 1"
+addWorksheet(workbook, sheetName = sheet_name, gridLines = T)
+writeData(workbook, sheet = sheet_name, table1_final, colNames = T, rowNames = F)
+    
+borderStyle <- createStyle(border = c('top', 'bottom', 'left', 'right'),
+                           borderColour = 'black', borderStyle = 'thin')
+blankStyle  <- createStyle(border = c('top', 'bottom', 'left', 'right'),
+                           borderColour = 'white')
+setRowHeights(workbook, sheet_name, rows = 1, heights = 70.5)
+setColWidths(workbook, sheet_name, cols = c(1, 2:ncol(table1_final)), 
+             widths = c(38, rep(13.5, ncol(table1_final) - 1)))
+    
+addStyle(workbook, sheet = sheet_name, blankStyle, 
+         rows = 1:70, cols = (ncol(table1_final) + 1):50, gridExpand = T, stack=T)
+addStyle(workbook, sheet = sheet_name, blankStyle,
+         rows = (nrow(table1_final) + 2):70, cols = 1:50, gridExpand = T, stack=T)
+addStyle(workbook, sheet = sheet_name, createStyle(textRotation = 45),
+         rows = 1, cols = 2:ncol(table1_final), gridExpand = T, stack=T)
+addStyle(workbook, sheet = sheet_name, createStyle(textDecoration = 'BOLD'),
+         rows = 1, cols = 1:ncol(table1_final), gridExpand = T, stack=T)
+addStyle(workbook, sheet = sheet_name, createStyle(textDecoration = 'BOLD'),
+         rows = var_rows + 1, cols = 1, gridExpand = T, stack=T)
+addStyle(workbook ,sheet = sheet_name, createStyle(wrapText = T),
+         rows = 1, cols = 1:ncol(table1_final), gridExpand = T, stack = T)
+addStyle(workbook ,sheet = sheet_name, createStyle(halign = "right"),
+         rows = 3:47, cols = 2:ncol(table1_final), gridExpand = T, stack = T)
+addStyle(workbook ,sheet = sheet_name, createStyle(halign = "center"),
+         rows = 2, cols = 2:ncol(table1_final), gridExpand = T, stack = T)
+addStyle(workbook, sheet = sheet_name, createStyle(fgFill = 'grey85'), 
+         rows = 1:(nrow(table1_final) + 1), cols=seq(2, ncol(table1_final), by = 2), 
+         gridExpand = T, stack = T)
+addStyle(workbook, sheet = sheet_name, borderStyle,
+         rows = 1:nrow(table1_final) + 1, cols=1:ncol(table1_final), 
+         gridExpand = T, stack = T)
+saveWorkbook(workbook, file = "table1.xlsx", overwrite = T)
+```
+
