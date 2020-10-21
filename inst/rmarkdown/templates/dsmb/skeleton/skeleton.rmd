@@ -1,0 +1,113 @@
+---
+output: html_document
+---
+
+
+# *DSMB Plan*
+
+*Preparation Date*: `r Sys.Date()`
+
+
+# *Design Summary*
+
+## Study Abstract
+
+## Primary Hypothesis
+
+## Primary and Secondary Aims
+
+## Inclusion and Exclusion Criteria
+
+## Intervention Group
+
+## Primary and Secondary Outcomes
+
+## Target Sample Size and Allocation
+
+## Data Collection Schedule
+
+## Timeline
+
+# Overall Study Status - Narrative
+
+## DSMB Meeting Minutes
+
+## Action Items and Response
+
+## Study Status and Chronolog since Previous Meeting
+
+## Challenges since Last Report and Steps to Handle Them
+
+# Recruitment and Participant Status
+
+*Insert figure with participant flow chart*
+
+# Enrollment and Randomization
+
+## Current Enrollment and Randomization Numbers
+*Insert figure with randomization actual vs expected*
+
+
+*Insert table with screening, enrollment, randomization and withdrawal numbers*
+
+
+*Insert table with counts of reasons for ineligibility among the consented*
+
+## Barriers to Meeting Recruitment Goals
+
+## Strategies in Place or Planned to Address Recruitment Shortfalls
+
+# Baseline Characteristics
+
+*Insert table with demographic summary statistics of randomized participants*
+
+# Study Withdrawal
+
+*Table with counts of reasons for study withdrawal*
+
+*Table with date, time point and details for individal withdrawals*
+
+# Study Visit Completion and Data Recorded
+
+*insert graph showing missing visits*
+
+*insert table of visit completion status by site*
+
+# Protocol Deviations
+
+*insert table of protocol deviations*
+
+# Safety Data
+
+## Serious Adverse Events
+
+*insert table of serious adverse events by body system*
+
+*insert table of serious adverse event descriptions*
+
+## Non-Serious Adverse Events
+
+*insert table of non-serious adverse events by body system*
+
+## Unanticipated Problems
+
+*insert table of unanticipated problems*
+
+# Any Other Pertinent Issues
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
