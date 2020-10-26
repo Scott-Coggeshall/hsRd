@@ -1,0 +1,22 @@
+digraph g {
+
+start [shape = box, label = "CONSORT Graph"];
+node0 [shape = box, label = "Screened/Asssesed for Eligibility\n(n = n_screened)"];
+node1 [shape = box, label = "Enrolled/Consented\n(n = n_enrolled)"];
+node2 [shape = box, label = "Ineligible\n(n = n_ineligible)"];
+node3 [shape = box, label = "Declined to participate\n(n = n_declined)"];
+node4 [shape = box, label = "Randomized\n(n = n_randomized)"];
+node5 [shape = box, label = "Allocated to Intervention 1\n(n = n_randomized_group1)"];
+node6 [shape = box, label = "Allocated to Intervention 2\n(n = n_randomized_group2)"];
+node7 [shape = box, label = "Withdrew (n = n_withdrew_group1)\nLost to follow-up (n = n_lost_group1)"];
+node8 [shape = box, label = "Withdrew (n = n_withdrew_group2)\nLost to follow-up (n = n_lost_group2)"];
+node9 [shape = box, label = "Active (n = n_active_group1)\nFollow-up Completed (n = n_completed_group1)"];
+node10 [shape = box, label = "Active (n = n_active_group2)\nFollow-up Completed (n = n_completed_group2)"];
+node11 [shape = box, label = "Analyzed\n(n = n_analyzed_group1)"];
+node12 [shape = box, label = "Analyzed\n(n = n_analyzed_group2)"];
+node0 -> node1 -> node4;
+node0 -> node2;
+node1 -> node3;
+node4 -> node5 -> node7 -> node9 -> node11;
+node4 -> node6 -> node8 -> node10 -> node12;
+}
