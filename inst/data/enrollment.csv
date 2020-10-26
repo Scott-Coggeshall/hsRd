@@ -1,0 +1,10 @@
+id,site,stage,action,date
+1,1,screening,screened,10/10/2020
+1,1,screening,declined,10/10/2020
+2,1,screening,screened,10/10/2020
+2,1,screening,ineligible,10/10/2020
+3,2,screening,screened,10/11/2020
+3,2,enrollment,enrolled,10/11/2020
+4,2,screening,screened,10/11/2020
+4,2,enrollment,enrolled,10/11/2020
+4,2,enrollment,declined,10/12/2020

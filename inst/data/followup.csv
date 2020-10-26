@@ -1,0 +1,10 @@
+id,site,stage,action,date
+5,1,followup,begin,10/15/2020
+5,1,followup,withdrew,10/20/2020
+6,2,followup,begin,10/15/2020
+6,2,followup,assessment,1/15/2021
+6,2,followup,assessment,4/15/2021
+6,2,followup,complete,4/15/2021
+7,1,followup,begin,10/16/2020
+7,1,followup,assessment,1/16/2021
+7,1,followup,lost,4/30/2021
