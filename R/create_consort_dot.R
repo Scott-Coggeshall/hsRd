@@ -39,6 +39,6 @@ create_consort_dot <- function(consort_table){
 
   consort_dot <- sub("n_analyzed_group2", consort_table[17, 2], consort_dot, fixed = T)
 
-
+  consort_dot
 
 }
