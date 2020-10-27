@@ -11,6 +11,8 @@ dsmb_plan <- drake_plan(
 
   consort_table = build_consort_table(status_data),
 
+  consort_dot = create_consort_dot(consort_table),
+
   randomization_figure = plot_randomization(randomization_data),
 
   adverse_event_summary = summarize_adverse_event(dsmb_data),
