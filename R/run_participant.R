@@ -1,3 +1,4 @@
+#' @export
 run_participant <- function(id, site){
 
   screened <- Sys.Date() + sample(0:20, 1)

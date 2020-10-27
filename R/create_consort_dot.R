@@ -1,3 +1,4 @@
+#' @export
 create_consort_dot <- function(consort_table){
 
 

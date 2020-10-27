@@ -1,3 +1,4 @@
+#' @export
 build_consort_table <- function(status_data){
 
   n_screened <- nrow(status_data[status_data$stage == "screening" & status_data$action == "screened", ])

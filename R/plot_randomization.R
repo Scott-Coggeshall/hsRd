@@ -1,3 +1,4 @@
+#' @export
 plot_randomization <- function(randomization_data){
 
 
