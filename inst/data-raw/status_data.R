@@ -11,7 +11,7 @@ status_data_list <- lapply(1:n, function(x) run_participant(id = x,
 status_data <- Reduce("rbind", status_data_list)
 
 
-enrollment_data <- status_data[status_data$stage == "enrollment", ]
+enrollment_data <- status_data[status_data$stage == "enrollment" | status_data$stage == "screening", ]
 
 randomization_data <- status_data[status_data$stage == 'randomization', ]
 
