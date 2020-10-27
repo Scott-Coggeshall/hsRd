@@ -13,6 +13,14 @@ create_dsmb <- function(path, init_packages = c("drake", "hsRd", "tidyverse", "D
   file.copy(from = system.file(file.path("drake_reports", "dsmb_report.Rmd"), package = "hsRd"),
             to = file.path(path, "reports"))
 
+  file.copy(from = system.file(file.path("data", "enrollment.csv"), package = "hsRd"),
+            to = file.path(path, "data"))
+
+  file.copy(from = system.file(file.path("data", "randomization.csv"), package = "hsRd"),
+            to = file.path(path, "data"))
+
+  file.copy(from = system.file(file.path("data", "followup.csv"), package = "hsRd"),
+            to = file.path(path, "data"))
 
 
 
