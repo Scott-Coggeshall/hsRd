@@ -64,6 +64,11 @@ kable(readd(consort_table))
 ## Current Enrollment and Randomization Numbers
 *Insert figure with randomization actual vs expected*
 
+```{r randomization_figure}
+
+readd(randomization_figure)
+
+```
 
 *Insert table with screening, enrollment, randomization and withdrawal numbers*
 
