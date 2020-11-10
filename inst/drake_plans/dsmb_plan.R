@@ -1,11 +1,11 @@
 dsmb_plan <- drake_plan(
 
 
-  enrollment_data = read.csv(file_in(file.path("data", "enrollment.csv"))), #replace with your source data
+  enrollment_data = read.csv(file_in("data/ enrollment.csv")), #replace with your source data
 
-  randomization_data = read.csv(file_in(file.path("data", "randomization.csv"))),
+  randomization_data = read.csv(file_in("data/randomization.csv")),
 
-  followup_data = read.csv(file_in(file.path("data", "followup.csv"))),
+  followup_data = read.csv(file_in("data/followup.csv")),
 
   status_data = rbind(enrollment_data, randomization_data, followup_data),
 
@@ -17,8 +17,9 @@ dsmb_plan <- drake_plan(
 
   adverse_event_summary = summarize_adverse_event(dsmb_data),
 
-  dsmb_report = rmarkdown::render(input = knitr_in(file.path("reports", "skeleton.rmd")),
-                                  output = file_out(file.path("reports", "dsmb_report")))
+  dsmb_report = rmarkdown::render(input = knitr_in("reports/skeleton.rmd"),
+                                  output_file = file_out("dsmb_report.html"),
+                                  output_dir = ".")
 
 
 
