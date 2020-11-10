@@ -50,6 +50,34 @@ run_participant <- function(id, site){
 
   }
 
+  adverse_event <- rbinom(1, 1, .1)
+
+  if(adverse_event){
+
+    adverse_event_date <- randomized + sample(1:120,1)
+
+    severe_adverse <- rbinom(1, 1, .1)
+    if(severe_adverse){
+      return(rbind(
+       data.frame(id = id, site = site, stage = "screening", action = "screened", date = screened),
+       data.frame(id = id, site = site, stage = "enrollment", action = "enrolled", date = enrolled ),
+       data.frame(id = id, site = site, stage = "randomization", action = randomization, date = randomized),
+       data.frame(id = id, site = site, stage = "followup", action = "begin", date = randomized),
+       data.frame(id = id, site = site, stage = "followup", action = "severe_adverse_event", date = adverse_event_date)))
+      } else{
+
+        return(rbind(
+          data.frame(id = id, site = site, stage = "screening", action = "screened", date = screened),
+          data.frame(id = id, site = site, stage = "enrollment", action = "enrolled", date = enrolled ),
+          data.frame(id = id, site = site, stage = "randomization", action = randomization, date = randomized),
+          data.frame(id = id, site = site, stage = "followup", action = "begin", date = randomized),
+          data.frame(id = id, site = site, stage = "followup", action = "adverse_event", date = adverse_event_date)))
+
+    }
+
+  }
+
+
   return(rbind(
     data.frame(id = id, site = site, stage = "screening", action = "screened", date = screened),
     data.frame(id = id, site = site, stage = "enrollment", action = "enrolled", date = enrolled ),
