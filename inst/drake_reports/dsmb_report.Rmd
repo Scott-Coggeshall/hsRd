@@ -1,8 +1,9 @@
 ---
 title: "DSMB Report for *Project Name*"
 output: 
-  html_document:
+  word_document:
     number_sections: true
+    reference_docx: dsmb_reference.docx
 ---
 
 
@@ -82,6 +83,12 @@ readd(randomization_figure)
 # Baseline Characteristics
 
 *Insert table with demographic summary statistics of randomized participants*
+
+```{r}
+
+readd(baseline_table)
+
+```
 
 # Study Withdrawal
 

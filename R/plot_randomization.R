@@ -3,7 +3,7 @@ plot_randomization <- function(randomization_data){
 
 
 
-  p_dat <- randomization_data %>% arrange(date) %>% # order by date
+  p_dat <- randomization_data %>% arrange(date) %>% mutate(date = as.Date(date)) %>% # order by date
     group_by( date) %>% summarize(n = n()) %>% # calculate number people randomized each date
     mutate(n_total = cumsum(n)) # get cumulative sum up to that date
 
