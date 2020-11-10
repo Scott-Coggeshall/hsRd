@@ -1,6 +1,6 @@
 #' @export
 create_dsmb <- function(path, init_packages = c("drake", "hsRd", "tidyverse", "DiagrammeR", "rmarkdown", "knitr"),
-                        init_renv = TRUE, init_rproj = TRUE, init_git = FALSE){
+                        init_renv = FALSE, init_rproj = TRUE, init_git = FALSE){
 
 
   project_skeleton(path, init_packages, init_rproj = init_rproj,
