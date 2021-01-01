@@ -6,9 +6,11 @@ Author: Scott Coggeshall
 Maintainer: <scott.coggeshall@va.gov>
 Description: This package contains .rmd templates for reports (e.g. statistical analysis plans) as well as miscellaneous helper functions for common tasks encountered by HSR&D data folks.
 License: MIT License
-Imports: tidyverse,
-         ggplot2,
-         flextable
+Imports: 
+    tidyverse,
+    ggplot2,
+    flextable,
+    magrittr
 Suggests: drake,
           renv
 Encoding: UTF-8

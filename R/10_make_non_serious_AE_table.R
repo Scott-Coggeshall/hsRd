@@ -1,5 +1,5 @@
 #' @export
-
+#' @importFrom magrittr %>%
 make_non_serious_AE_table <- function(df_adverse_event, df_randomization,
                                       title = "Non-Serious AEs") {
 

@@ -1,5 +1,5 @@
 #' @export
-
+#' @importFrom magrittr %>%
 # uses data that looks like enrollment.csv
 # convert site to factor and make it an ordered factor if you care about order of output
 # convert date to datetime
@@ -85,8 +85,8 @@ make_recruit_retain_table <- function(df_enrollment, df_randomization, df_follow
   return(l_table)
 }
 
-# example
-df_enrollment <- enrollment %>%
-  mutate(site = factor(site),
-         date = as.Date(date))
-make_recruit_retain_table(pats_screened, pats_randomized)
+# # example
+# df_enrollment <- enrollment %>%
+#   mutate(site = factor(site),
+#          date = as.Date(date))
+# make_recruit_retain_table(pats_screened, pats_randomized)

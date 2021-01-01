@@ -1,5 +1,5 @@
 #' @export
-
+#' @importFrom magrittr %>%
 # takes data that looks like baseline.csv
 #baseline <- read_csv("hsRd/data/baseline.csv")
 
