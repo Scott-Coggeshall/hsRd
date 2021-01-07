@@ -45,6 +45,6 @@ make_non_serious_AE_table <- function(df_adverse_event, df_randomization,
              ref_symbols = c("*", "+", "^"),
              part = "header")
 
-  l_ouput <- list(df = df3, flex_table = flex_table)
+  l_output <- list(df = df3, flex_table = flex_table)
   return(l_output)
 }
