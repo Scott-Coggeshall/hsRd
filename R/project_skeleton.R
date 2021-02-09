@@ -28,7 +28,7 @@ project_skeleton <- function(project_path, init_packages = c("drake", "tidyverse
   }
   # git init
   if(init_git){
-  system2(command = "git", args = c("init", project_path))
+  system2(command = "git", args = c("init", shQuote(project_path)))
 
   # create gitignore
   cat(".drake\n.Rproj.user\n.Rhistory\n.RData\n.Ruserdata\n.DS_Store", file = file.path(project_path, ".gitignore"))
@@ -59,7 +59,7 @@ project_skeleton <- function(project_path, init_packages = c("drake", "tidyverse
 
   # make the initial commit
   if(init_git){
-  system2(command = "git", args = c( "-C", project_path, "add", "."))
-  system2(command = "git", args = c("-C", project_path, "commit","-am", '"init commit"'))
+  system2(command = "git", args = c( "-C", shQuote(project_path), "add", "."))
+  system2(command = "git", args = c("-C", shQuote(project_path), "commit","-am", '"init commit"'))
   }
 }
