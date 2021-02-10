@@ -1,5 +1,5 @@
 #' @export
-create_dsmb <- function(path, init_packages = c("drake", "hsRd", "tidyverse", "DiagrammeR", "rmarkdown", "knitr",
+create_dsmb <- function(path, init_packages = c("drake",  "tidyverse", "DiagrammeR", "rmarkdown", "knitr",
                                                 "flextable", "tableone", "webshot"),
                         init_renv = FALSE, init_rproj = TRUE, init_git = FALSE){
 
@@ -35,8 +35,13 @@ create_dsmb <- function(path, init_packages = c("drake", "hsRd", "tidyverse", "D
   file.copy(from = system.file(file.path("rmarkdown", "reference_docs", "dsmb_reference.docx"), package = "hsRd"),
             to = file.path(path, "reports"))
 
+  file.copy(from = system.file(file.path("drake_functions", "make_baseline_characteristics_table.R"), package = "hsRd"),
+            to = file.path(path, "R"))
 
 
+  file.copy(from = system.file(file.path("drake_functions", "make_non_serious_AE_table.R"), package = "hsRd"),
+            to = file.path(path, "R"))
 
-
+  file.copy(from = system.file(file.path("drake_functions", "make_recruit_retain_table.R"), package = "hsRd"),
+            to = file.path(path, "R"))
 }
