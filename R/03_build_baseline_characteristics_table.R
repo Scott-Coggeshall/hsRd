@@ -1,8 +1,6 @@
 #' @export
 #' @importFrom magrittr %>%
 # takes data that looks like baseline.csv
-#baseline <- read_csv("hsRd/data/baseline.csv")
-
 # can make just an overall cohort table or split out into cohorts by treatment/site/etc...
 # returns a list with a dataframe and a flextable object
 make_baseline_characteristics_table <- function(data, vars = NULL, cohorts.col = NULL,
