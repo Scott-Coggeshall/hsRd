@@ -19,7 +19,7 @@ dsmb_plan <- drake_plan(
 
   randomization_figure = plot_randomization(randomization_data),
 
-  baseline_table = build_baseline_characteristics_table(baseline_data),
+  baseline_table = make_baseline_characteristics_table(baseline_data),
 
   recruit_retain_table = make_recruit_retain_table(enrollment_data, randomization_data, followup_data),
 
